@@ -39,6 +39,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'puma', '~> 2.16.0'
 gem 'devise', '~> 3.5.6'
 
+# ASSETS
+gem 'colorize'
+gem 'awesome_print'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
