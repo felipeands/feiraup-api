@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable
 
 
-  def login(username, password)
+  def self.login(username, password)
     user = self.find_by_email(username)
     if user.present? && user.valid_password?(password)
       user.generate_token
@@ -14,7 +14,11 @@ class User < ActiveRecord::Base
   end
 
   def generate_token
-    self.access_token = SecureRandom.hex(20) # probability = 1 / (32 ** 32)
+    self.access_token = SecureRandom.hex(20)
+  end
+
+  def verify_auth(email, token)
+    user = self.where(email: email).where(access_token: token)
   end
 
 end
