@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
     self.access_token = SecureRandom.hex(20)
   end
 
-  def verify_auth(email, token)
-    user = self.where(email: email).where(access_token: token)
+  def self.verify_auth(email, token)
+    self.where(email: email).where(access_token: token)
   end
 
 end

@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   # PLACES
   get '/cities',                    controller: :city, action: :list_actives
   get '/places/city/:id',           controller: :place, action: :list_places_actives_from_city
+  post '/route/add',                controller: :route, action: :add
 
   # USERS
   post '/user/login',                controller: :user, action: :login
-
 
 
 

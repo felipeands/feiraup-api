@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310205211) do
+ActiveRecord::Schema.define(version: 20160315205206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,27 @@ ActiveRecord::Schema.define(version: 20160310205211) do
   end
 
   add_index "places", ["city_id"], name: "index_places_on_city_id", using: :btree
+
+  create_table "positions", force: :cascade do |t|
+    t.string   "latitude"
+    t.string   "longitude"
+    t.integer  "route_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "positions", ["route_id"], name: "index_positions_on_route_id", using: :btree
+
+  create_table "routes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "place_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "routes", ["place_id"], name: "index_routes_on_place_id", using: :btree
+  add_index "routes", ["user_id"], name: "index_routes_on_user_id", using: :btree
 
   create_table "states", force: :cascade do |t|
     t.string   "acronym"
@@ -76,6 +97,9 @@ ActiveRecord::Schema.define(version: 20160310205211) do
 
   add_foreign_key "cities", "states"
   add_foreign_key "places", "cities"
+  add_foreign_key "positions", "routes"
+  add_foreign_key "routes", "places"
+  add_foreign_key "routes", "users"
   add_foreign_key "users", "cities"
   add_foreign_key "users", "states"
 end
