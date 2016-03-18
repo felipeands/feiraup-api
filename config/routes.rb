@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/cities',                    controller: :city, action: :list_actives
   get '/places/city/:id',           controller: :place, action: :list_places_actives_from_city
   post '/route/add',                controller: :route, action: :add
+  get '/route/place/:id',           controller: :route, action: :list_routes_from_place
 
   # USERS
   post '/user/login',                controller: :user, action: :login

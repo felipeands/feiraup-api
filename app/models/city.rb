@@ -1,4 +1,5 @@
 class City < ActiveRecord::Base
+  has_many :places
 
   enum status: { disabled: 0, enabled: 1 }
 
