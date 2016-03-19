@@ -1,5 +1,5 @@
 class RouteController < ApplicationController
-  before_action :verify_auth, only: [:add, :list_routes_from_place]
+  before_action :verify_auth
 
   def add
     route_params = new_route_params()
