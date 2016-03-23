@@ -6,7 +6,7 @@ class RouteController < ApplicationController
     route = Route.new
     route.name = route_params[:name]
     route.place_id = route_params[:place_id]
-    route.user_id = author.id
+    route.user_id = @author.id
 
     if route.save
       positions = JSON.parse(route_params[:positions])
@@ -42,7 +42,7 @@ class RouteController < ApplicationController
 
   def verify_auth
     user_params = user_params()
-    author = User.verify_auth(user_params[:email], user_params[:access_token]).first
-    return render json: {error: 'Usuário não autorizado'}, status: :unauthorized unless author.present?
+    @author = User.verify_auth(user_params[:email], user_params[:access_token]).first
+    return render json: {error: 'Usuário não autorizado'}, status: :unauthorized unless @author.present?
   end
 end
