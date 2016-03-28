@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 20160315205206) do
   add_index "places", ["city_id"], name: "index_places_on_city_id", using: :btree
 
   create_table "positions", force: :cascade do |t|
-    t.string   "lat"
-    t.string   "lng"
+    t.string   "latitude"
+    t.string   "longitude"
     t.integer  "local_id"
     t.string   "local_type"
     t.datetime "created_at", null: false

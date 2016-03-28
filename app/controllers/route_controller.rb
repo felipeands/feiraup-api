@@ -10,7 +10,7 @@ class RouteController < ApplicationController
 
     if route.save
       positions = JSON.parse(route_params[:positions])
-      positions.each { |p| Position.create(longitude: p['longitude'], latitude: p['latitude'], route: route) }
+      positions.each { |p| route.positions.create(longitude: p['longitude'], latitude: p['latitude']) }
       return render json: {message: 'Caminho adicionado com sucesso.'}, status: :ok
     else
       return render json: {error: 'Não foi possível adicionar'}, status: :unauthorized
