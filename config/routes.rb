@@ -4,12 +4,14 @@ Rails.application.routes.draw do
 
 
 
-  # PLACES
-  get '/cities',                    controller: :city, action: :list_actives
-  get '/places/city/:id',           controller: :place, action: :list_places_actives_from_city
-  post '/route/add',                controller: :route, action: :add
+  # ADMIN TASKS
+  post '/place/add',                controller: :place, action: :add
   post '/gallery/add',              controller: :gallery, action: :add
+  post '/route/add',                controller: :route, action: :add
+
+  get '/cities',                    controller: :city, action: :list_actives
   get '/place-full/:id',            controller: :place, action: :show_place_full
+  get '/places/city/:id',           controller: :place, action: :list_places_actives_from_city
 
   # USERS
   post '/user/login',               controller: :user, action: :login

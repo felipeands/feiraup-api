@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329051926) do
+ActiveRecord::Schema.define(version: 20160329203735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,9 +48,11 @@ ActiveRecord::Schema.define(version: 20160329051926) do
     t.datetime "updated_at",             null: false
     t.string   "latitude"
     t.string   "longitude"
+    t.integer  "user_id"
   end
 
   add_index "places", ["city_id"], name: "index_places_on_city_id", using: :btree
+  add_index "places", ["user_id"], name: "index_places_on_user_id", using: :btree
 
   create_table "positions", force: :cascade do |t|
     t.string   "latitude"
@@ -113,6 +115,7 @@ ActiveRecord::Schema.define(version: 20160329051926) do
   add_foreign_key "galleries", "places"
   add_foreign_key "galleries", "users"
   add_foreign_key "places", "cities"
+  add_foreign_key "places", "users"
   add_foreign_key "routes", "places"
   add_foreign_key "routes", "users"
   add_foreign_key "users", "cities"
