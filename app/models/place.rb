@@ -1,5 +1,6 @@
 class Place < ActiveRecord::Base
   has_many :routes, dependent: :destroy
+  has_many :galleries, dependent: :destroy
   belongs_to :city
 
   enum status: { disabled: 0, enabled: 1 }
