@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315205206) do
+ActiveRecord::Schema.define(version: 20160328200233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20160315205206) do
   end
 
   add_index "cities", ["state_id"], name: "index_cities_on_state_id", using: :btree
+
+  create_table "galleries", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "place_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "galleries", ["place_id"], name: "index_galleries_on_place_id", using: :btree
+  add_index "galleries", ["user_id"], name: "index_galleries_on_user_id", using: :btree
 
   create_table "places", force: :cascade do |t|
     t.string   "name"
@@ -97,6 +108,8 @@ ActiveRecord::Schema.define(version: 20160315205206) do
   add_index "users", ["state_id"], name: "index_users_on_state_id", using: :btree
 
   add_foreign_key "cities", "states"
+  add_foreign_key "galleries", "places"
+  add_foreign_key "galleries", "users"
   add_foreign_key "places", "cities"
   add_foreign_key "routes", "places"
   add_foreign_key "routes", "users"
