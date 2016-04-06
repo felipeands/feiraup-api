@@ -7,6 +7,7 @@ class GalleryController < ApplicationController
     gallery.name = gallery_params[:name]
     gallery.place_id = gallery_params[:place_id]
     gallery.user_id = @author.id
+    gallery.floors = gallery_params[:floors]
 
     if gallery.save
       positions = JSON.parse(gallery_params[:positions])
@@ -37,7 +38,7 @@ class GalleryController < ApplicationController
   end
 
   def new_gallery_params
-    params.permit(:place_id, :name, :positions)
+    params.permit(:place_id, :name, :positions, :floors)
   end
 
   def verify_auth
