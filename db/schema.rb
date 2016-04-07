@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20160406185135) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "floors",     default: 1
+    t.text     "address"
   end
 
   add_index "galleries", ["place_id"], name: "index_galleries_on_place_id", using: :btree
