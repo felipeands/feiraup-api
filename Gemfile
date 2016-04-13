@@ -36,7 +36,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 # MY DEPENDENCIES
-# gem 'puma', '~> 2.16.0'
+gem 'puma', '~> 2.16.0'
 gem 'devise', '~> 3.5.6'
 
 # ASSETS

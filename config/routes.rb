@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/cities',                    controller: :city, action: :list_actives
   get '/place-full/:id',            controller: :place, action: :show_place_full
   get '/places/city/:id',           controller: :place, action: :list_places_actives_from_city
+  get '/gallery/place/:id',         controller: :gallery, action: :list_galleries_from_place
 
   # USERS
   post '/user/login',               controller: :user, action: :login
