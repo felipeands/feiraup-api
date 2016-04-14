@@ -1,5 +1,5 @@
 class RouteController < ApplicationController
-  before_action :verify_auth
+  before_action :verify_auth, except: [:list_routes_from_place, :list_routes_from_place_with_positions]
 
   def add
     route_params = new_route_params()
@@ -19,6 +19,11 @@ class RouteController < ApplicationController
   end
 
   def list_routes_from_place
+    routes = Place.find(params[:id]).routes
+    render json: {routes: routes}, status: :ok
+  end
+
+  def list_routes_from_place_with_positions
     routes = Place.find(params[:id]).routes
     results = []
     routes.each do |route|

@@ -1,5 +1,5 @@
 class GalleryController < ApplicationController
-  before_action :verify_auth, except: [:list_galleries_from_place]
+  before_action :verify_auth, except: [:list_galleries_from_place, :gallery_info]
 
   def add
     gallery_params = new_gallery_params()
@@ -23,6 +23,23 @@ class GalleryController < ApplicationController
   def list_galleries_from_place
     galleries = Place.find(params[:id]).galleries
     render json: {galleries: galleries}, status: :ok
+  end
+
+  def list_galleries_actives_from_place_with_positions
+    galleries = Place.find(params[:id]).galleries
+    results = []
+    galleries.each do |route|
+      result = Hash.new
+      result[:info] = route
+      result[:positions] = route.positions
+      results << result
+    end
+    render json: {galleries: results}, status: :ok
+  end
+
+  def gallery_info
+    gallery = Gallery.find(params[:id])
+    render json: {gallery: gallery}, status: :ok
   end
 
   private
