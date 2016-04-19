@@ -38,6 +38,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # MY DEPENDENCIES
 gem 'puma', '~> 2.16.0'
 gem 'devise', '~> 3.5.6'
+gem 'ancestry', '~> 2.1.0'
 
 # ASSETS
 gem 'colorize'
