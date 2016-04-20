@@ -5,8 +5,6 @@ class CreateCategories < ActiveRecord::Migration
       t.string :slug
       t.string :ancestry, index: true
       t.integer :status, default: 1
-
-      t.timestamps null: false
     end
 
     dad = Category.create(name:'Feminino')

@@ -17,12 +17,10 @@ ActiveRecord::Schema.define(version: 20160419183423) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name"
-    t.string   "slug"
-    t.string   "ancestry"
-    t.integer  "status",     default: 1
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string  "name"
+    t.string  "slug"
+    t.string  "ancestry"
+    t.integer "status",   default: 1
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
