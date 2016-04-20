@@ -20,6 +20,12 @@ Rails.application.routes.draw do
   post '/user/login',               controller: :user, action: :login
 
 
+  # UTILS
+  # categories
+  get '/category/search',           controller: :category, action: :search
+  get '/category/list',             controller: :category, action: :list
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
