@@ -21,4 +21,8 @@ class User < ActiveRecord::Base
     self.where(email: email).where(access_token: token)
   end
 
+  def is_admin
+    self.role == 'admin'
+  end
+
 end

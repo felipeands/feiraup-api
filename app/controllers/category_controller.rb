@@ -1,11 +1,5 @@
 class CategoryController < ApplicationController
 
-  def list_tree
-    roots = Category.roots
-    roots.each do |r|
-    end
-  end
-
   def search
     q = "%#{params[:q].downcase}%"
     found = Category.enabled.where('LOWER(name) LIKE ?', q)

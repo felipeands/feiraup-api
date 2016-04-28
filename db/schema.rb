@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419183423) do
+ActiveRecord::Schema.define(version: 20160427235145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,35 @@ ActiveRecord::Schema.define(version: 20160419183423) do
   add_index "routes", ["place_id"], name: "index_routes_on_place_id", using: :btree
   add_index "routes", ["user_id"], name: "index_routes_on_user_id", using: :btree
 
+  create_table "shop_categories", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "shop_categories", ["category_id"], name: "index_shop_categories_on_category_id", using: :btree
+  add_index "shop_categories", ["shop_id"], name: "index_shop_categories_on_shop_id", using: :btree
+
+  create_table "shops", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "gallery_id"
+    t.string   "street"
+    t.string   "street_corner"
+    t.integer  "floor"
+    t.integer  "route_id"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.integer  "owner_id"
+    t.integer  "author_id"
+    t.integer  "status",        default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "shops", ["gallery_id"], name: "index_shops_on_gallery_id", using: :btree
+  add_index "shops", ["route_id"], name: "index_shops_on_route_id", using: :btree
+
   create_table "states", force: :cascade do |t|
     t.string   "acronym"
     t.string   "name"
@@ -129,6 +158,10 @@ ActiveRecord::Schema.define(version: 20160419183423) do
   add_foreign_key "places", "users"
   add_foreign_key "routes", "places"
   add_foreign_key "routes", "users"
+  add_foreign_key "shop_categories", "categories"
+  add_foreign_key "shop_categories", "shops"
+  add_foreign_key "shops", "galleries"
+  add_foreign_key "shops", "routes"
   add_foreign_key "users", "cities"
   add_foreign_key "users", "states"
 end

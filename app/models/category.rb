@@ -1,5 +1,10 @@
 class Category < ActiveRecord::Base
   has_ancestry
+
+  # allow get "shops" from "category"
+  has_many :shop_categories
+  has_many :shops, through: :shop_categories, source: 'shop'
+
   enum status: { disabled: 0, enabled: 1 }
 
   def self.list_fields

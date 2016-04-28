@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/place/add',                controller: :place, action: :add
   post '/gallery/add',              controller: :gallery, action: :add
   post '/route/add',                controller: :route, action: :add
+  post '/shop/add',                 controller: :shop, action: :add
 
   get '/cities',                    controller: :city, action: :list_actives
   get '/place-full/:id',            controller: :place, action: :show_place_full

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  gallery_id: 
+  street: MyString
+  street_corner: MyString
+  floor: 1
+  route_id: 
+  latitude: MyString
+  longitude: MyString
+  owner: 1
+  author: 1
+  status: 1
+
+two:
+  name: MyString
+  gallery_id: 
+  street: MyString
+  street_corner: MyString
+  floor: 1
+  route_id: 
+  latitude: MyString
+  longitude: MyString
+  owner: 1
+  author: 1
+  status: 1
