@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post '/shop/add',                 controller: :shop, action: :add
 
   get '/cities',                    controller: :city, action: :list_actives
+  get '/place-info/:id',            controller: :place, action: :show_place_info
   get '/place-full/:id',            controller: :place, action: :show_place_full
   get '/places/city/:id',           controller: :place, action: :list_places_actives_from_city
   get '/gallery/:id',               controller: :gallery, action: :gallery_info

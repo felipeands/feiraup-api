@@ -27,6 +27,12 @@ class PlaceController < ApplicationController
     render json: {places: places}, status: :ok
   end
 
+  def show_place_info
+    place = Place.find(params[:id])
+
+    render json: {place: place}, status: :ok
+  end
+
   def show_place_full
     place = Place.find(params[:id])
 
