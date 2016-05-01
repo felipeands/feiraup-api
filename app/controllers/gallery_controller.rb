@@ -55,6 +55,6 @@ class GalleryController < ApplicationController
   def verify_auth
     user_params = user_params()
     @author = User.verify_auth(user_params[:email], user_params[:access_token]).first
-    return render json: {error: 'Usuário não autorizado'}, status: :unauthorized unless @author.present?
+    return render json: {error: 'Usuário não autorizado'}, status: :unauthorized unless @author.present? && @author.is_admin
   end
 end
