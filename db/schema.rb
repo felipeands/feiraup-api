@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427235145) do
+ActiveRecord::Schema.define(version: 20160502025154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,9 +111,15 @@ ActiveRecord::Schema.define(version: 20160427235145) do
     t.integer  "status",        default: 0
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "place_id"
+    t.string   "phone"
+    t.string   "phone2"
+    t.string   "email"
+    t.text     "obs"
   end
 
   add_index "shops", ["gallery_id"], name: "index_shops_on_gallery_id", using: :btree
+  add_index "shops", ["place_id"], name: "index_shops_on_place_id", using: :btree
   add_index "shops", ["route_id"], name: "index_shops_on_route_id", using: :btree
 
   create_table "states", force: :cascade do |t|
@@ -161,6 +167,7 @@ ActiveRecord::Schema.define(version: 20160427235145) do
   add_foreign_key "shop_categories", "categories"
   add_foreign_key "shop_categories", "shops"
   add_foreign_key "shops", "galleries"
+  add_foreign_key "shops", "places"
   add_foreign_key "shops", "routes"
   add_foreign_key "users", "cities"
   add_foreign_key "users", "states"

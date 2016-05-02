@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/gallery/:id',               controller: :gallery, action: :gallery_info
   get '/gallery/place/:id',         controller: :gallery, action: :list_galleries_from_place
   get '/route/place/:id',           controller: :route, action: :list_routes_from_place
+  get '/shop/place/:id',            controller: :shop, action: :list_shops_from_place
 
   # USERS
   post '/user/login',               controller: :user, action: :login

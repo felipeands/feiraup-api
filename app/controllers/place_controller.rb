@@ -42,7 +42,9 @@ class PlaceController < ApplicationController
     routes = place.routes
     routes_positions_results = get_positions(routes)
 
-    render json: {place: place, galleries: galleries_positions_results, routes: routes_positions_results}, status: :ok
+    shops = place.shops
+
+    render json: {place: place, galleries: galleries_positions_results, routes: routes_positions_results, shops: shops}, status: :ok
   end
 
   def get_positions(collection)
