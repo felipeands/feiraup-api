@@ -44,7 +44,8 @@ class GalleryController < ApplicationController
 
   def gallery_info
     gallery = Gallery.find(params[:id])
-    render json: {gallery: gallery}, status: :ok
+    positions = gallery.positions
+    render json: {gallery: gallery, positions: positions}, status: :ok
   end
 
   private
