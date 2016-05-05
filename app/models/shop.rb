@@ -5,6 +5,8 @@ class Shop < ActiveRecord::Base
   has_many :shop_categories
   has_many :categories, through: :shop_categories, source: 'category'
 
+  has_one :position, -> { where(position_type: 'position') }, as: :local, dependent: :destroy
+
   belongs_to :gallery
   belongs_to :route
 
@@ -12,4 +14,5 @@ class Shop < ActiveRecord::Base
   belongs_to :user, foreign_key: 'author_id'
 
   enum status: { disabled: 0, enabled: 1 }
+
 end

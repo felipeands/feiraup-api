@@ -11,8 +11,13 @@ class GalleryController < ApplicationController
     gallery.address = gallery_params[:address]
 
     if gallery.save
+
       positions = JSON.parse(gallery_params[:positions])
       positions.each { |p| gallery.positions.create(longitude: p['longitude'], latitude: p['latitude']) }
+
+      doors = JSON.parse(gallery_params[:doors])
+      doors.each { |d| gallery.doors.create(longitude: d['longitude'], latitude: d['latitude']) }
+
       return render json: {message: 'Galeria adicionada com sucesso.'}, status: :ok
     else
       return render json: {error: 'Não foi possível adicionar'}, status: :unauthorized
@@ -49,7 +54,7 @@ class GalleryController < ApplicationController
   end
 
   def new_gallery_params
-    params.permit(:place_id, :name, :positions, :floors, :address)
+    params.permit(:place_id, :name, :positions, :doors, :floors, :address)
   end
 
   def verify_auth

@@ -16,16 +16,16 @@ class ShopController < ApplicationController
     shop.place_id = shop_params[:place_id] if shop_params[:place_id].present? && shop_params[:place_id] != 'undefined'
     shop.obs = shop_params[:obs]
 
-    position = JSON.parse(shop_params[:position])
-    shop.longitude = position['longitude']
-    shop.latitude = position['latitude']
-
     shop.author_id = @author.id
     shop.owner_id = @author.id
     shop.status = 1
 
+    position = JSON.parse(shop_params[:position])
+    shop.build_position(longitude: position['longitude'], latitude: position['latitude'])
+
+    eval(shop_params[:categories]).each { |c| shop.shop_categories.build(category_id: c) }
+
     if shop.save
-      eval(shop_params[:categories]).each { |c| shop.shop_categories.create(category_id: c) }
       return render json: {message: 'Loja adicionada com sucesso.'}, status: :ok
     else
       return render json: {message: 'Não foi possível adicionar'}, status: :unauthorized

@@ -10,9 +10,7 @@ class PlaceController < ApplicationController
     place.status = 1
 
     position = JSON.parse(place_params[:position])
-    place.longitude = position['longitude']
-    place.latitude = position['latitude']
-
+    place.build_position(latitude: position['latitude'], longitude: position['longitude'])
 
     if place.save
       return render json: {message: 'Local adicionado com sucesso'}, status: :ok
@@ -29,7 +27,7 @@ class PlaceController < ApplicationController
 
   def show_place_info
     place = Place.find(params[:id])
-
+    place = place.place_with_position
     render json: {place: place}, status: :ok
   end
 
@@ -42,10 +40,12 @@ class PlaceController < ApplicationController
     routes = place.routes
     routes_positions_results = get_positions(routes)
 
-    shops = place.shops
+    shops = place.shops_with_positions
 
     render json: {place: place, galleries: galleries_positions_results, routes: routes_positions_results, shops: shops}, status: :ok
   end
+
+  private
 
   def get_positions(collection)
     result = []
@@ -53,12 +53,11 @@ class PlaceController < ApplicationController
       hash = Hash.new
       hash[:info] = item
       hash[:positions] = item.positions
+      hash[:doors] = item.doors if item.kind_of?(Gallery)
       result << hash
     end
     result
   end
-
-  private
 
   def new_place_params
     params.permit(:city_id, :name, :position)

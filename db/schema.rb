@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502025154) do
+ActiveRecord::Schema.define(version: 20160504195747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,8 +70,9 @@ ActiveRecord::Schema.define(version: 20160502025154) do
     t.string   "longitude"
     t.integer  "local_id"
     t.string   "local_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "position_type"
   end
 
   add_index "positions", ["local_type", "local_id"], name: "index_positions_on_local_type_and_local_id", using: :btree
