@@ -2,12 +2,12 @@ class AddPositionTypeToPositions < ActiveRecord::Migration
   def change
     add_column :positions, :position_type, :string
 
-    remove_column :shop, :latitude
-    remove_column :shop, :longitude
+    remove_column :shops, :latitude
+    remove_column :shops, :longitude
 
-    remove_column :place, :latitude
-    remove_column :place, :longitude
-    remove_column :place, :integer
+    remove_column :places, :latitude
+    remove_column :places, :longitude
+    remove_column :places, :integer
 
     Shop.all.destroy_all
     Route.all.destroy_all
