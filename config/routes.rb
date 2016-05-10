@@ -5,28 +5,29 @@ Rails.application.routes.draw do
 
 
   # ADMIN TASKS
-  post '/place/add',                controller: :place, action: :add
-  post '/gallery/add',              controller: :gallery, action: :add
-  post '/route/add',                controller: :route, action: :add
-  post '/shop/add',                 controller: :shop, action: :add
+  post '/place/add',                controller: :place,       action: :add
+  post '/gallery/add',              controller: :gallery,     action: :add
+  post '/route/add',                controller: :route,       action: :add
+  post '/shop/add',                 controller: :shop,        action: :add
 
-  get '/cities',                    controller: :city, action: :list_actives
-  get '/place-info/:id',            controller: :place, action: :show_place_info
-  get '/place-full/:id',            controller: :place, action: :show_place_full
-  get '/places/city/:id',           controller: :place, action: :list_places_actives_from_city
-  get '/gallery/:id',               controller: :gallery, action: :gallery_info
-  get '/gallery/place/:id',         controller: :gallery, action: :list_galleries_from_place
-  get '/route/place/:id',           controller: :route, action: :list_routes_from_place
-  get '/shop/place/:id',            controller: :shop, action: :list_shops_from_place
+  get '/cities',                    controller: :city,        action: :list_actives
+  get '/place-info/:id',            controller: :place,       action: :show_place_info
+  get '/place-full/:id',            controller: :place,       action: :show_place_full
+  get '/places/city/:id',           controller: :place,       action: :list_places_actives_from_city
+  get '/gallery/:id',               controller: :gallery,     action: :gallery_info
+  get '/gallery/place/:id',         controller: :gallery,     action: :list_galleries_from_place
+  get '/route/place/:id',           controller: :route,       action: :list_routes_from_place
+  get '/route/:id',                 controller: :route,       action: :route_info
+  get '/shop/place/:id',            controller: :shop,        action: :list_shops_from_place
 
   # USERS
-  post '/user/login',               controller: :user, action: :login
+  post '/user/login',               controller: :user,        action: :login
 
 
   # UTILS
   # categories
-  get '/category/search',           controller: :category, action: :search
-  get '/category/list',             controller: :category, action: :list
+  get '/category/search',           controller: :category,    action: :search
+  get '/category/list',             controller: :category,    action: :list
 
 
 
