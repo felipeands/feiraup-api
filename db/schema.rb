@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504195747) do
+ActiveRecord::Schema.define(version: 20160512174904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20160504195747) do
     t.string   "phone2"
     t.string   "email"
     t.text     "obs"
+    t.string   "photo"
   end
 
   add_index "shops", ["gallery_id"], name: "index_shops_on_gallery_id", using: :btree

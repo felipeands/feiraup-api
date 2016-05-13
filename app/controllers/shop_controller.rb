@@ -15,6 +15,7 @@ class ShopController < ApplicationController
     shop.route_id = shop_params[:route_id] if shop_params[:route_id].present? && shop_params[:route_id] != 'undefined'
     shop.place_id = shop_params[:place_id] if shop_params[:place_id].present? && shop_params[:place_id] != 'undefined'
     shop.obs = shop_params[:obs]
+    shop.photo = shop_params[:photo]
 
     shop.author_id = @author.id
     shop.owner_id = @author.id
@@ -44,7 +45,7 @@ class ShopController < ApplicationController
   end
 
   def new_shop_params
-    params.permit(:name,:shop_email,:phone,:phone2,:gallery_id,:street,:street_corner,:floor,:route_id,:position,:categories,:place_id,:obs)
+    params.permit(:name,:shop_email,:phone,:phone2,:gallery_id,:street,:street_corner,:floor,:route_id,:position,:categories,:place_id,:obs,:photo)
   end
 
   def verify_auth
