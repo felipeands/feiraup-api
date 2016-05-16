@@ -55,7 +55,6 @@ class Category < ActiveRecord::Base
   end
 
   def self.sub_categories(categories)
-    puts "#{categories.inspect}".on_blue
     sub = []
     categories.each do |cat|
       sub = sub | cat.child_ids
