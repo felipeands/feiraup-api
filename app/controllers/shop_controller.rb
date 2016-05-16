@@ -46,7 +46,7 @@ class ShopController < ApplicationController
     category_ids << categories_found.pluck(:id) if categories_found.present?
     category_ids = category_ids | sub_categories_found if sub_categories_found.present?
 
-    shops = Shop.where(id: category_ids)
+    shops = Shop.enabled.where(id: category_ids)
     return render json: {shops: shops}, status: :ok
   end
 
