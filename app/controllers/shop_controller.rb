@@ -1,5 +1,5 @@
 class ShopController < ApplicationController
-  before_action :verify_auth
+  before_action :verify_auth, except: [:search]
 
   def add
     shop_params = new_shop_params
@@ -36,6 +36,18 @@ class ShopController < ApplicationController
   def list_shops_from_place
     shops = Shop.find(params[:id]).shops
     render json: {shops: shops}, status: :ok
+  end
+
+  def search
+    categories_found = Category.search(params[:q])
+    sub_categories_found = Category.sub_categories(categories_found) if categories_found.present?
+
+    category_ids = []
+    category_ids << categories_found.pluck(:id) if categories_found.present?
+    category_ids = category_ids | sub_categories_found if sub_categories_found.present?
+
+    shops = Shop.where(id: category_ids)
+    return render json: {shops: shops}, status: :ok
   end
 
   private

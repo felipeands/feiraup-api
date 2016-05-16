@@ -50,4 +50,17 @@ class Category < ActiveRecord::Base
     self.arrange_serializable
   end
 
+  def self.search(q)
+    self.where('lower(name) LIKE ?', "%#{q.downcase}%")
+  end
+
+  def self.sub_categories(categories)
+    puts "#{categories.inspect}".on_blue
+    sub = []
+    categories.each do |cat|
+      sub = sub | cat.child_ids
+    end
+    sub
+  end
+
 end
