@@ -40,6 +40,8 @@ class ShopController < ApplicationController
   end
 
   def search
+    return render json: {shops: []}, status: :ok if params[:q].size < 3
+
     categories_found = Category.search(params[:q])
     sub_categories_found = Category.sub_categories(categories_found) if categories_found.present?
 
@@ -47,7 +49,11 @@ class ShopController < ApplicationController
     category_ids << categories_found.pluck(:id) if categories_found.present?
     category_ids = category_ids | sub_categories_found if sub_categories_found.present?
 
-    shops = Shop.enabled.where(id: category_ids).select(:id, :name, :description)
+    return render json: {shops: []}, status: :ok unless category_ids.present?
+
+    shop_ids = ShopCategory.where(category: category_ids.flatten).pluck(:shop_id)
+    shops = Shop.enabled.where(id: shop_ids).select(:id, :name, :photo, :description)
+
     return render json: {shops: shops}, status: :ok
   end
 
