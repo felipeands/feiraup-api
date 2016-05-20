@@ -15,6 +15,7 @@ class ShopController < ApplicationController
     shop.route_id = shop_params[:route_id] if shop_params[:route_id].present? && shop_params[:route_id] != 'undefined'
     shop.place_id = shop_params[:place_id] if shop_params[:place_id].present? && shop_params[:place_id] != 'undefined'
     shop.obs = shop_params[:obs]
+    shop.description = shop_params[:description]
     shop.photo = shop_params[:photo]
 
     shop.author_id = @author.id
@@ -46,7 +47,7 @@ class ShopController < ApplicationController
     category_ids << categories_found.pluck(:id) if categories_found.present?
     category_ids = category_ids | sub_categories_found if sub_categories_found.present?
 
-    shops = Shop.enabled.where(id: category_ids)
+    shops = Shop.enabled.where(id: category_ids).select(:id, :name, :description)
     return render json: {shops: shops}, status: :ok
   end
 
@@ -57,7 +58,7 @@ class ShopController < ApplicationController
   end
 
   def new_shop_params
-    params.permit(:name,:shop_email,:phone,:phone2,:gallery_id,:street,:street_corner,:floor,:route_id,:position,:categories,:place_id,:obs,:photo)
+    params.permit(:name,:shop_email,:phone,:phone2,:gallery_id,:street,:street_corner,:floor,:route_id,:position,:categories,:place_id,:obs,:description,:photo)
   end
 
   def verify_auth
