@@ -1,5 +1,5 @@
 class ShopController < ApplicationController
-  before_action :verify_auth, except: [:search]
+  before_action :verify_auth, except: [:search, :show]
 
   def add
     shop_params = new_shop_params
@@ -40,7 +40,7 @@ class ShopController < ApplicationController
   end
 
   def search
-    return render json: {shops: []}, status: :ok if params[:q].size < 3
+    return render json: {shops: []}, status: :ok if params[:q].size < 2
 
     categories_found = Category.search(params[:q])
     sub_categories_found = Category.sub_categories(categories_found) if categories_found.present?
@@ -55,6 +55,11 @@ class ShopController < ApplicationController
     shops = Shop.enabled.where(id: shop_ids).select(:id, :name, :photo, :description)
 
     return render json: {shops: shops}, status: :ok
+  end
+
+  def show
+    shop = Shop.find(params[:id])
+    return render json: {shop: shop}, status: :ok
   end
 
   private

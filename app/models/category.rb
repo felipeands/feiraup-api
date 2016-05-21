@@ -57,7 +57,7 @@ class Category < ActiveRecord::Base
   def self.sub_categories(categories)
     sub = []
     categories.each do |cat|
-      sub = sub | cat.child_ids
+      sub = sub | cat.descendant_ids
     end
     sub
   end
