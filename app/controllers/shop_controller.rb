@@ -35,7 +35,7 @@ class ShopController < ApplicationController
   end
 
   def list_shops_from_place
-    shops = Shop.find(params[:id]).shops
+    shops = Place.find(params[:id]).shops
     render json: {shops: shops}, status: :ok
   end
 
@@ -57,9 +57,9 @@ class ShopController < ApplicationController
     return render json: {shops: shops}, status: :ok
   end
 
-  def show
+  def show_shop_full
     shop = Shop.find(params[:id])
-    return render json: {shop: shop}, status: :ok
+    return render json: {shop: shop, position: shop.position}, status: :ok
   end
 
   private
