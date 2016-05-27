@@ -1,5 +1,5 @@
 class ShopController < ApplicationController
-  before_action :verify_auth, except: [:search, :show]
+  before_action :verify_auth, except: [:search, :show_shop_full]
 
   def add
     shop_params = new_shop_params
@@ -61,7 +61,10 @@ class ShopController < ApplicationController
 
   def show_shop_full
     shop = Shop.find(params[:id])
-    return render json: {shop: shop, position: shop.position}, status: :ok
+    position = shop.position
+    category_ids = shop.shop_categories.pluck(:category_id)
+    categories = Category.where(id: category_ids).select(:id, :name)
+    return render json: {shop: shop, position: position, categories: categories}, status: :ok
   end
 
   private
