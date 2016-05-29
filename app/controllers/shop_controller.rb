@@ -61,9 +61,8 @@ class ShopController < ApplicationController
 
   def show_shop_full
     shop = Shop.find(params[:id])
-    position = shop.position
-    category_ids = shop.shop_categories.pluck(:category_id)
-    categories = Category.where(id: category_ids).select(:id, :name)
+    position = shop.position.select(:latitude, :longitude)
+    categories = shop.categories.select(:id, :name)
     return render json: {shop: shop, position: position, categories: categories}, status: :ok
   end
 
