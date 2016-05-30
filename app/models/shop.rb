@@ -15,4 +15,15 @@ class Shop < ActiveRecord::Base
 
   enum status: { disabled: 0, enabled: 1 }
 
+  def get_address
+    if self.gallery.present?
+
+    elsif self.route.present?
+      route = self.route
+      street = route
+      place = street.place
+      city = place.city
+    end
+  end
+
 end
