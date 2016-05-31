@@ -20,9 +20,9 @@ class Shop < ActiveRecord::Base
 
     elsif self.route.present?
       route = self.route
-      street = route
-      place = street.place
+      place = route.place
       city = place.city
+      [city.name,place.name,route.name,shop.number]
     end
   end
 
